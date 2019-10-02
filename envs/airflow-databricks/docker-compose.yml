@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+
+  airflow:
+    image: docker-whirl-sdh-airflow:local
+    ports:
+      - '5000:5000'  # HTTP (Airflow Web UI)
+    env_file:
+      - .whirl.env
+    environment:
+      - WHIRL_SETUP_FOLDER
+      - UNPAUSE_DAG
+    volumes:
+      - ${DAG_FOLDER}:/usr/local/airflow/dags/
+      - ./whirl.setup.d:${WHIRL_SETUP_FOLDER}/env.d/
+    depends_on:
+      - mockserver
+
+  mockserver:
+    image: jamesdbloom/mockserver:mockserver-5.5.1
+    #    build:
+    #      context: ../../docker/mockserver
+    #      dockerfile: Dockerfile
+    ports:
+      - 1080:1080
+      - 1081:1081
+    environment:
+      - LOG_LEVEL=INFO
+      - SERVER_PORT="1080,1081"
