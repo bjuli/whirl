@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 from airflow.models import DAG
-from .custom_operator import (
+from examples.custom_operators import (
     DatabricksJobGetIdOperator,
     DatabricksJobFromXCOMRunNowOperator
 )
@@ -19,7 +19,6 @@ with DAG(
     catchup=True,
     max_active_runs=1,
 ) as dag:
-
     getid = DatabricksJobGetIdOperator(
         task_id='databricks-get-job-id',
         job_name='name-of-existing-job',

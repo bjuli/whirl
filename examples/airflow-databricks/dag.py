@@ -17,15 +17,18 @@ with DAG(
     catchup=True,
     max_active_runs=1,
 ) as dag:
-    runnow = DatabricksRunNowOperator(
+    runnow2 = DatabricksRunNowOperator(
+        job_id=2,
+        task_id='databricks-airflow-task-id',
+        databricks_conn_id="databricks_default",
+        execution_timeout=timedelta(minutes=60),
+    )
+    runnow25 = DatabricksRunNowOperator(
         job_id=25,
         task_id='databricks-airflow-task-id',
         databricks_conn_id="databricks_default",
-        execution_timeout=timedelta(minutes=60),git
+        execution_timeout=timedelta(minutes=60),
     )
 
-    dumb = DummyOperator(
-        task_id="this-is-a-Dummy"
-    )
 
-runnow >> dumb
+runnow2 >> runnow25
