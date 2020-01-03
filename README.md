@@ -267,7 +267,8 @@ The environment to be used is set in the `.whirl.env` in the DAG directory. In t
 
 #### Databricks 
 
-In this example we connect Airflow to Databricks. It uses the (databricks api)[databricks.com] through a mockserver.
+In this example we connect Airflow to Databricks. It uses the 
+[databricks jobs api](https://docs.databricks.com/dev-tools/api/latest/jobs.html) through a mockserver.
 The example shows how a databricks job can be started with an airflow task.
 
 ##### Databricks custom operators
