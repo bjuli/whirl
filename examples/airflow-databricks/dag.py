@@ -23,12 +23,9 @@ with DAG(
         databricks_conn_id="databricks_default",
         execution_timeout=timedelta(minutes=60),
     )
-    runnow25 = DatabricksRunNowOperator(
-        job_id=25,
-        task_id='databricks-airflow-task-id',
-        databricks_conn_id="databricks_default",
-        execution_timeout=timedelta(minutes=60),
+    dummytask = DummyOperator(
+        task_id='dummy-task'
     )
 
 
-runnow2 >> runnow25
+runnow2 >> dummytask

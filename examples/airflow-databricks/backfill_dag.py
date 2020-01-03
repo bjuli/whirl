@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 from airflow.models import DAG
-from examples.custom_operators import (
+from custom_operators.databricks_xcom_operator import (
     DatabricksJobGetIdOperator,
     DatabricksJobFromXCOMRunNowOperator
 )

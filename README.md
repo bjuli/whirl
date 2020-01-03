@@ -265,8 +265,27 @@ Also open your browser at http://localhost:1080 for the email client where the e
 
 The environment to be used is set in the `.whirl.env` in the DAG directory. In the environment folder there is also a `.whirl.env` which specifies specific Airflow configuration variables.
 
+#### Databricks 
+
+In this example we connect Airflow to Databricks. It uses the (databricks api)[databricks.com] through a mockserver.
+The example shows how a databricks job can be started with an airflow task.
+
+##### Databricks custom operators
+The dag `backfill_dag.py` runs an existing databricks job with different dates. 
+The example assumes that only the job name is known, not the job number. The example uses a custom operator, based on 
+the `run-now` operator. It looks for all existing jobs with the given name and runs the latest. 
+
+Both dags can be run with:
+
+```
+cd ./examples/airflow-databricks
+./whirl -e databricks-airflow
+```
+
 ## References
 
 An early version of _whirl_ was brought to life at [ING](https://github.com/ing-bank). Bas Beelen gave a presentation describing how _whirl_ was helpful in their infrastructure during the 2nd Apache Airflow Meetup, January 23 2019, hosted at Google London HQ.
 
 [![Whirl explained at Apache Airflow Meetup](./whirl-youtube.png)](https://www.youtube.com/watch?v=jqK_HCOJ9Ak)
+
+
